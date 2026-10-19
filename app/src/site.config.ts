@@ -23,7 +23,7 @@ export const BUSINESS_OWNER_EMAIL = "gisa37730@gmail.com";
  * and redeploy. A new client needs a new key made with THEIR email; never
  * reuse another client's key, or their inquiries would go to the wrong inbox.
  */
-export const WEB3FORMS_ACCESS_KEY = "";
+export const WEB3FORMS_ACCESS_KEY = "c6085163-a9b8-411c-ae2a-052c30450a30";
 
 // PUBLIC business facts (from the Google Business listing). Safe to ship.
 export const SITE = {
