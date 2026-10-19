@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import { SITE } from "../../site.config";
 import { Bolt, Logo } from "./hero";
 import { QuoteForm } from "./quote-form";
+import { publicUrl } from "../../lib/paths";
 
 function Icon({ d }: { d: ReactNode }) {
   return (
@@ -85,7 +86,7 @@ export function MeetDave() {
     <section id="dave" className="relative isolate overflow-hidden text-[var(--paper)]" style={{ background: "var(--ink)" }}>
       {/* depth 1: photo band */}
       <div data-parallax="0.22" className="absolute -inset-y-[18%] inset-x-0" aria-hidden="true">
-        <img src="/assets/band.webp" alt="" loading="lazy" decoding="async" width={1600} height={900} className="h-full w-full object-cover object-[30%_50%]" />
+        <img src={publicUrl("assets/band.webp")} alt="" loading="lazy" decoding="async" width={1600} height={900} className="h-full w-full object-cover object-[30%_50%]" />
       </div>
       {/* depth 2: tint */}
       <div className="absolute inset-0" aria-hidden="true" style={{ background: "linear-gradient(90deg, rgba(8,13,24,0.25) 0%, rgba(8,13,24,0.7) 45%, rgba(8,13,24,0.94) 70%)" }} />

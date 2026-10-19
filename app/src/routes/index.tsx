@@ -5,6 +5,7 @@ import { Hero, Nav } from "../components/site/hero";
 import { useParallax, useReveal } from "../components/site/motion";
 import { Contact, Footer, MeetDave, Process, Quote, Reviews, Services, TrustBar } from "../components/site/sections";
 import { SITE } from "../site.config";
+import { publicUrl } from "../lib/paths";
 
 const TITLE = "D & B Electric | Electrician in Las Vegas, NV · Free Quotes";
 const DESCRIPTION =
@@ -54,7 +55,7 @@ export const Route = createFileRoute("/")({
     ],
     links: [
       { rel: "canonical", href: `${SITE.siteUrl}/` },
-      { rel: "preload", as: "image", href: "/assets/hero-poster.jpg", fetchPriority: "high" },
+      { rel: "preload", as: "image", href: publicUrl("assets/hero-poster.jpg"), fetchPriority: "high" },
     ],
   }),
   component: Index,

@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 
 import { SITE } from "../../site.config";
+import { publicUrl } from "../../lib/paths";
 
-const POSTER = "/assets/hero-poster.jpg";
+const POSTER = publicUrl("assets/hero-poster.jpg");
 
 function HeroVideo() {
   const ref = useRef<HTMLVideoElement>(null);
@@ -18,7 +19,7 @@ function HeroVideo() {
     const small = window.innerWidth < 900 || slow;
     v.muted = true;
     v.defaultMuted = true;
-    v.src = small ? "/assets/hero-720.mp4" : "/assets/hero-1080.mp4";
+    v.src = publicUrl(small ? "assets/hero-720.mp4" : "assets/hero-1080.mp4");
     let cancelled = false;
     const tryPlay = () => {
       const p = v.play();

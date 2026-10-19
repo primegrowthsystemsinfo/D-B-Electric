@@ -22,7 +22,12 @@ const QUANTA_ICONS_SHIM = fileURLToPath(
 export default defineConfig(({ mode }) => {
   const designInspectorEnabled = process.env.HF_DESIGN_INSPECTOR === "1" || mode === "design";
 
+  // Sub-path hosting (GitHub Pages serves this repo at /D-B-Electric/).
+  // Unset = served from the domain root, as on Higgsfield.
+  const base = (process.env.BASE_PATH || "/").replace(/\/?$/, "/");
+
   return {
+    base,
     resolve: {
       alias: [{ find: /^@higgsfield-ai\/icons(\/.*)?$/, replacement: QUANTA_ICONS_SHIM }],
     },

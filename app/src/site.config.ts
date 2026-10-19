@@ -27,7 +27,9 @@ export const WEB3FORMS_ACCESS_KEY = "";
 
 // PUBLIC business facts (from the Google Business listing). Safe to ship.
 export const SITE = {
-  siteUrl: "https://db-electric-vegas.higgsfield.app",
+  // Public address of the live site (no trailing slash). The GitHub Pages build
+  // overrides it with VITE_SITE_URL so links and previews point at that copy.
+  siteUrl: (import.meta.env?.VITE_SITE_URL as string | undefined) || "https://db-electric-vegas.higgsfield.app",
   name: "D & B Electric",
   owner: "Dave",
   phoneDisplay: "(702) 870-7310",

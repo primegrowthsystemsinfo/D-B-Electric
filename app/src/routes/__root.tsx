@@ -15,6 +15,7 @@ import { reportHiggsfieldError } from "../lib/higgsfield-error-reporting";
 // repo by the marketplace meta API and read at BUILD time — no runtime fetch.
 // Editing it via the app settings UI rewrites this file and redeploys the app.
 import appMetaJson from "../app-meta.json";
+import { BASE_URL, publicUrl } from "../lib/paths";
 
 declare const __HF_DESIGN_INSPECTOR__: boolean;
 
@@ -49,13 +50,13 @@ const APP_HOST_ZONES = ["higgsfield.app", "higgsfield-dev.app"];
 
 function toOwnAssetUrl(value: string | null | undefined): string | null {
   if (!value) return null;
-  if (value.startsWith("/")) return value; // already root-relative
+  if (value.startsWith("/")) return publicUrl(value); // site-relative
   try {
     const u = new URL(value);
     const isAppHost = APP_HOST_ZONES.some(
       (zone) => u.hostname === zone || u.hostname.endsWith(`.${zone}`),
     );
-    if (isAppHost) return u.pathname + u.search;
+    if (isAppHost) return publicUrl(u.pathname) + u.search;
     return value; // external host (CDN, etc.) — keep absolute
   } catch {
     return value; // not a parseable URL — leave as-is
@@ -98,7 +99,7 @@ function buildHead(meta: AppMeta) {
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" as const },
       { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Figtree:wght@400;500;600;700&display=swap" },
       { rel: "stylesheet", href: appCss },
-      { rel: "apple-touch-icon", href: "/assets/apple-touch-icon.png" },
+      { rel: "apple-touch-icon", href: publicUrl("assets/apple-touch-icon.png") },
       ...(favicon ? [{ rel: "icon", href: favicon }] : []),
     ],
   };
@@ -133,7 +134,7 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   return (
     <Shell title="This page didn't load" body="Something went wrong on our end. Try refreshing, or call (702) 870-7310.">
       <button type="button" className="btn-ghost" onClick={() => { router.invalidate(); reset(); }}>Try again</button>
-      <a href="/" className="btn-ghost">Go home</a>
+      <a href={BASE_URL} className="btn-ghost">Go home</a>
     </Shell>
   );
 }
